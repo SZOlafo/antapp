@@ -1,7 +1,20 @@
+using antapp.Models;
+using antapp.UserMenu;
+using antapp.Chat;
+using antapp.GameMap;
+using antapp.LoginService;
+using antapp.Shared;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSharedModule();
+builder.Services.AddUserMenuModule();
+builder.Services.AddChatModule();
+builder.Services.AddGameMapModule();
+builder.Services.AddLoginServiceModule();
 
 var app = builder.Build();
 

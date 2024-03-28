@@ -1,7 +1,12 @@
-﻿namespace antapp.UserMenu
-{
-    public class UserMenuModule
-    {
+﻿using antapp.UserMenu.Builders;
+using Microsoft.Extensions.DependencyInjection;
 
+namespace antapp.UserMenu;
+
+public static class UserMenuModule
+{
+    public static void AddUserMenuModule(this IServiceCollection services)
+    {
+        services.AddScoped<IUserMenuViewModelBuilder, UserMenuViewModelBuilder>();
     }
 }

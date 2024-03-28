@@ -23,7 +23,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="UserMenu" asp-action="Index">UserMenu</a>
                         </li>
                     </ul>
                 </div>
@@ -45,18 +45,6 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    <div class="text-center">
-    <iframe width="600"
-            height="450"
-            style="border:0"
-            loading="lazy"
-            allowfullscreen
-            referrerpolicy="no-referrer-when-downgrade"
-            
-            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC6vUtCrF3B1OfZgnCvu6U2EhWT8c0dK9g
-    &q=Space,Park Stanisława Tołpy+WA">
-    </iframe>
-    </div>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

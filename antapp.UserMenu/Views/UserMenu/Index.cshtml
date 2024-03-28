@@ -1,0 +1,51 @@
+﻿@using antapp.UserMenu.ViewModel
+@using antapp.UserMenu.Models
+
+@model UserMenuIndexViewModel
+
+@{
+    ViewBag.Title = "UserMenu";
+}
+
+<div>
+    <h1>@Model.UserName</h1>
+</div>
+
+<div class="accordion" id="AntCollection">
+    <div class="accordionItem">
+        <h2 class="accordion-header" id="header-@Model.UserName" >
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#ants-@Model.UserName" aria-expanded="false" aria-controls="ants-@Model.UserName">
+                <div>Ant Collection</div>
+            </button>
+        </h2>
+
+        <div id="ants-@Model.UserName" class="accordion-collapse collapse show" aria-labelledby="AntCollection">
+            <div class="accordion-body">
+                <table class="table">
+                    @foreach (var ant in Model.AntCollection)
+                    {
+                        <tr>
+                            <td>@ant.Name</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>  
+</div>
+
+<div class="accordion" id="Achivments">
+    <div class="accordionItem">
+        <h2 class="accordion-header" id="header2-@Model.UserName">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#achivments-@Model.UserName" aria-expanded="false" aria-controls="achivments-@Model.UserName">
+                <div>Achivments</div>
+            </button>
+        </h2>
+
+        <div id="achivments-@Model.UserName" class="accordion-collapse collapse show" aria-labelledby="Achivments">
+            <div class="accordion-body">
+                Achivment get
+            </div>
+        </div>
+    </div>
+</div>

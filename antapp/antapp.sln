@@ -11,11 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "antapp.Shared", "..\antapp.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "antapp.UserMenu", "..\antapp.UserMenu\antapp.UserMenu.csproj", "{03ABEF7E-0318-4834-B3D3-77E492A730AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginService", "..\LoginService\LoginService.csproj", "{C9A0C18F-8F28-4267-BBE8-9EE04A4CA59D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "antapp.LoginService", "..\LoginService\antapp.LoginService.csproj", "{C9A0C18F-8F28-4267-BBE8-9EE04A4CA59D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat", "..\Chat\Chat.csproj", "{5FEBD965-C53F-481B-9808-2448D0605977}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "antapp.Chat", "..\Chat\antapp.Chat.csproj", "{5FEBD965-C53F-481B-9808-2448D0605977}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameMap", "..\GameMap\GameMap.csproj", "{BAC4AE9D-E6C7-4781-8601-C2922D59DE77}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "antapp.GameMap", "..\GameMap\antapp.GameMap.csproj", "{BAC4AE9D-E6C7-4781-8601-C2922D59DE77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
