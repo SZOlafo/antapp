@@ -2,15 +2,40 @@
 
 public interface IUserAccesor
 {
+    bool IsAuthenticated { get; set; }
     int UserId { get; }
     string Login { get; }
     string Password { get; }
+
+    bool LoginUser(int userId, string login);
+    bool LogoutUser();
 }
 
-internal class DummyUser : IUserAccesor
+public class DummyUser : IUserAccesor
 {
-    public int UserId => 1;
+    public bool IsAuthenticated { get; set; }
+    public int UserId { get; set; }
+    public string Login { get; set; }
+    public string Password { get; set; }
 
-    public string Login => "AntMaster";
-    public string Password => "mruwa";
+    public DummyUser()
+    {
+        IsAuthenticated = true;
+        UserId = 1;
+        Login = "AntMaster";
+        Password = "Mruwa";
+    }
+
+    public bool LoginUser(int userId, string login)
+    {
+        IsAuthenticated = true;
+        Login = login;
+        return IsAuthenticated;
+    }
+
+    public bool LogoutUser()
+    {
+        IsAuthenticated = false;
+        return IsAuthenticated;
+    }
 }

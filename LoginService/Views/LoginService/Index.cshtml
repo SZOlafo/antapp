@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Login Service";
+}
+
+<div>
+    <h1>Log in:</h1>
+</div>
+<div style="width:450px">
+    <form id="loginForm">
+        <input type="text" placeholder="User Name or Email" id="userName" name="userName" class="form-control">
+        <input type="password" placeholder="password" id="password" name="password" class="form-control">
+        <button type="button" class="btn btn-outline-success" onclick="login('#loginForm')">Log in</button>
+    </form>
+    <div>
+        I don't have account: 
+        <a href="/RegisterService" class="button-primary">Sign in</a>
+    </div>
+</div>
+
+
+<script>
+    async function login(formId) {
+        const loginForm = document.querySelector(formId);
+        const formData = new FormData(loginForm);
+        const formProps = Object.fromEntries(formData);
+        try {
+            const request = {
+                UserName: formProps.userName,
+                password: formProps.password
+            }
+            await fetch('/LoginService/Login', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(request)
+            })
+            window.location.reload();
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+</script>

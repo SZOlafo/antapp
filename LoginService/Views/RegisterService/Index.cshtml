@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Register Service";
+}
+<div>
+    <h1>Create new account:</h1>
+</div>
+<div style="width:450px">
+    <form id="registerForm">
+        <input type="text" placeholder="User Name" id="userName" name="userName" class="form-control">
+        <input type="text" placeholder="Email" id="email" name="email" class="form-control">
+        <input type="password" placeholder="Password" id="password" name="password" class="form-control">
+            <button type="button" class="btn btn-outline-success" onclick="register('#registerForm')">Sign in</button>
+    </form>
+    <div>
+        I already have account: 
+        <a href="/LoginService" class="button-primary">Log in</a>
+    </div>
+</div>
+
+
+<script>
+    async function register(formId) {
+        const registerForm = document.querySelector(formId);
+        const formData = new FormData(registerForm);
+        const formProps = Object.fromEntries(formData);
+        try {
+            const request = {
+                UserName: formProps.userName,
+                password: formProps.password,
+                email: formProps.email
+            }
+            await fetch('/RegisterService/Register', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(request)
+            })
+            //window.location.reload();
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+</script>
