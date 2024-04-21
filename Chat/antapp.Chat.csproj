@@ -33,5 +33,9 @@
 	  <PackageReference Include="v24.OpenApi.Models" Version="2.0.45" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\antapp.Shared\antapp.Shared.csproj" />
+	</ItemGroup>
+
 </Project>
 
