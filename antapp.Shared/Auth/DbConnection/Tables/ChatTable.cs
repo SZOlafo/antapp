@@ -10,11 +10,11 @@ namespace antapp.Shared.Auth.DbConnection.Tables
     [Table("Location")]
     public class ChatTable
     {
-        public required int Id { get; set; }
-        public required string ChatName { get; set; }
-        public string Description { get; set; }
+        public required int id { get; set; }
+        public required string chatname { get; set; }
+        public required string description { get; set; }
 
         [ForeignKey("LocationId")]
-        public required int LocationId { get; set; }
+        public virtual LocationTable locationid { get; set; }
     }
 }
