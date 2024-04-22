@@ -2,7 +2,7 @@
 
 namespace antapp.Shared.Auth.DbConnection.Tables;
 
-[Table("use_ant")]
+[Table("user_ant")]
 public class UserAntTable
 {
     [ForeignKey("UserId")]

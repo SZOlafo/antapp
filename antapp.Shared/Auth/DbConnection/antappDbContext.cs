@@ -1,6 +1,5 @@
 ﻿using antapp.Shared.Auth.DbConnection.Tables;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace antapp.Shared.Auth.DbConnection;
 
