@@ -23,15 +23,15 @@ internal class UserAntService : IUserAntsService
     public async Task<List<UserAnt>> GetUserAnts(string userId)
     {
         return await _db.UserAnts
-            .Where(x => x.UserId == userId)
+            .Where(x => x.userid == userId)
             .Select(x => new UserAnt
             {
-                Id = x.Ant.Id,
-                Name = x.Ant.AntName,
-                Description = x.Ant.Description,
-                ImageUrl = x.Ant.ImageUrl,
-                CatchDate = x.CathDate,
-                CatchLocation = x.Location.LocationName
+                Id = x.Ants.id,
+                Name = x.Ants.antname,
+                Description = x.Ants.description,
+                ImageUrl = x.Ants.imageurl,
+                CatchDate = x.catchdate,
+                CatchLocation = x.Location.locationname
             })
             .ToListAsync();
     }

@@ -34,7 +34,7 @@ internal class ChatService : IChatService
                 Id = x.id,
                 Description = x.description,
                 Chatname = x.chatname,
-                LocationId = x.locationid.Id,
+                LocationId = x.Location.id,
             }).FirstOrDefaultAsync();
     }
 
@@ -62,6 +62,7 @@ internal class ChatService : IChatService
             _dbContext.ChatEntries.Remove(entry);
             await _dbContext.SaveChangesAsync();
         }
+        //await _dbContext.ChatEntries.Where(e => e.id == entryId).ExecuteDeleteAsync();
     }
 
     public async Task AddChatEntry(ChatEntryDto entry, string user)
@@ -89,6 +90,7 @@ internal class ChatService : IChatService
             toEdit.message = entry.message;
             await _dbContext.SaveChangesAsync();
         }
+        //await _dbContext.ChatEntries.Where(x => x.id == entry.Id).ExecuteUpdateAsync(x => x.SetProperty(y => y.message, entry.message));
     }
 }
 

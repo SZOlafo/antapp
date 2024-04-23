@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace antapp.Shared.Auth.DbConnection.Tables
 {
-    [Table("Location")]
+    [Table("chat")]
     public class ChatTable
     {
         public required int id { get; set; }
         public required string chatname { get; set; }
         public required string description { get; set; }
 
-        [ForeignKey("LocationId")]
-        public virtual LocationTable locationid { get; set; }
+        [ForeignKey("locationid")]
+        public virtual LocationTable Location { get; set; }
     }
 }
