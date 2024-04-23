@@ -1,19 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace antapp.Shared.Auth.DbConnection.Tables;
 
 [Table("user_ant")]
 public class UserAntTable
 {
-    [ForeignKey("UserId")]
-    public required string UserId {  get; set; }
-    [ForeignKey("AntId")]
-    public required int AntId { get; set; }
-    public required DateTime CathDate { get; set; }
-    [ForeignKey("CatchLocation")]
-    public required int CatchLocation {  get; set; }
-
-    public virtual AntTable Ant {  get; set; }
+    [Key]
+    public required int id { get; set; }
+    [ForeignKey("userid")]
+    public required string userid {  get; set; }
+    [ForeignKey("antid")]
+    public virtual AntTable Ants { get; set; }
+    [ForeignKey("catchlocation")]
     public virtual LocationTable Location { get; set; }
+    public required DateTime catchdate { get; set; }
 
 }

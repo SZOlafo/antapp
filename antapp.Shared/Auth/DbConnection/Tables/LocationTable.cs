@@ -1,13 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace antapp.Shared.Auth.DbConnection.Tables;
 
-[Table("Location")]
+[Table("location")]
 public class LocationTable
 {
-    public required int Id { get; set; }
-    public required string LocationName { get; set; }
-    public required string Description { get; set; }
-    public required string Coordinates { get; set; }
-    public required int Range { get; set; }
+    [Key]
+    public required int id { get; set; }
+    public required string locationname { get; set; }
+    public required string description { get; set; }
+    public required string coordinates { get; set; }
+    public required int range { get; set; }
 }

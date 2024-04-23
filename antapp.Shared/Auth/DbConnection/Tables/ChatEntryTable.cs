@@ -14,14 +14,13 @@ namespace antapp.Shared.Auth.DbConnection.Tables
         [Key]
         public int id { get; set; }
         public required string message { get; set; }
-        public required bool messageVisibility {  get; set; }
+        public required bool messagevisibility {  get; set; }
         public required DateOnly EntryDate { get; set; }
 
         [ForeignKey("chatId")]
         public required int chatId { get; set; }
 
         [ForeignKey("userId")]
-        public required int userId { get; set; }
-
+        public required string userId { get; set; }
     }
 }

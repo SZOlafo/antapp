@@ -12,5 +12,18 @@ public class antappDbContext : DbContext
     public required DbSet<ChatEntryTable> ChatEntries { get; set; }
     public antappDbContext(DbContextOptions<antappDbContext> options) : base(options)
     {
+
+    }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        //builder.UseIdentityByDefaultColumns();
+        //builder.Entity<UserAntTable>()
+        //    .HasNoKey();
+
+        //builder.Entity<AntTable>()
+        //    .HasMany(e => e.UserAntCollection)
+        //    .WithOne(e => e.Ants)
+        //    .HasForeignKey(e => e.antid);
     }
 }
