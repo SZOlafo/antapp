@@ -1,45 +1,27 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-@{
-    ViewBag.Title = "Chat";
+﻿
+@model antapp.Chat.ViewModels.ChatViewModel
+
+<div>
+    <h1>Chat</h1>
+</div>
+
+@if(Model.Chat == null)
+{
+
 }
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE-edge">
-    <meta name="viewport" content = "width=device-width, initial-scale=1.0">
-    <title>Comments </title>
-</head>
-
-<body>
-    <div class="comment-sesction">
-        <div class="list">
-            <div class="user">
-            </div>
-        </div>
-    </div>
-</body>
-</html>
-
-<script>
-    async function login(formId) {
-        const loginForm = document.querySelector(formId);
-        const formData = new FormData(loginForm);
-        const formProps = Object.fromEntries(formData);
-        try {
-            const request = {
-                UserName: formProps.userName,
-                password: formProps.password
-            }
-            await fetch('/LoginService/Login', {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(request)
-            })
-            window.location.reload();
-        } catch (error) {
-            console.error('Error:', error);
+else{
+    <h2>@Model.Chat.Chatname</h2>
+    <h3 class="text-muted">@Model.Chat.Description</h3>
+    <table class="table">
+        @foreach(var x in Model.Entries)
+        {
+            <tr>
+                <td>@x.EntryDate</td>
+                <td>
+                    <div>x.mesage</div>
+                </td>
+            </tr>
         }
-    }
-</script>
+    </table>
+}
+
