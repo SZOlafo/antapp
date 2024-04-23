@@ -7,10 +7,10 @@ namespace antapp.Shared.Auth.DbConnection.Tables;
 public class AntTable
 {
     [Key]
-    public required int Id {  get; set; }
-    public required string AntName { get; set; }
-    public required string Description { get; set; }
-    public required string? ImageUrl { get; set; }
+    public required int id {  get; set; }
+    public required string antname { get; set; }
+    public required string description { get; set; }
+    public required string? imageurl { get; set; }
 
-    public required ICollection<UserAntTable> UserAntConnectors { get; set; }
+    public virtual ICollection<UserAntTable> UserAntCollection { get; set; }
 }
