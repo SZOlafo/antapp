@@ -10,7 +10,7 @@ namespace antapp.Chat.ViewModels
 {
     public class ChatViewModel
     {
-        public required ChatDto chat {  get; set; }
-        public required List<ChatEntryDto> entries { get; set; }
+        public required ChatDto Chat {  get; set; }
+        public required List<ChatEntryDto> Entries { get; set; }
     }
 }

@@ -26,8 +26,8 @@ namespace antapp.Chat.Builders
         {
             return new ChatViewModel
             {
-                chat = await _chatService.GetChat(chatId),
-                entries = await _chatService.GetChatEntries(chatId),
+                Chat = await _chatService.GetChat(chatId),
+                Entries = await _chatService.GetChatEntries(chatId),
             };
         }
     }
