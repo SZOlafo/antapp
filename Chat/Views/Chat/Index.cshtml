@@ -1,24 +1,8 @@
-﻿
-@{
-    ViewBag.Title = "Register Service";
-}
-@model antapp.Chat.ViewModels.ChatViewModel
-<head>
-    <title>Styled Textbox</title>
-    <style>
-        #exampleTextbox {
-            width: 800px;       /* Szerokość pola tekstowego */
-            height: 300px;       /* Wysokość pola tekstowego */
-            font-size: 20px;    /* Rozmiar czcionki w polu tekstowym */
-            padding: 10px;      /* Padding wewnątrz pola tekstowego */
-            border: 2px solid black; /* Grubość i kolor obramowania */
-            border-radius: 10px; /* Zaokrąglenie narożników obramowania */
-            background-color: #f8f8f8; /* Kolor tła pola tekstowego */
-        }
-    </style>
-</head>
+﻿@model antapp.Chat.ViewModels.ChatViewModel
 
-<body>
+@{
+    ViewBag.Title = "Chat";
+}
 
 @if(Model.Chat is null)
 {
@@ -40,17 +24,20 @@ else{
                         <div class="card-body">
                          
                         <p class="card-text">@x.message</p>
-                        </div>
-            
+                    </div>
+                </div>
                </td>
             </tr>
         }
     </table>
     <form>
         <div>
-            <label for="exampleTextbox">Zostaw komentarz:</label>
+            <label for="exampleTextbox">Leave a comment:</label>
         </div>
-        <textarea type="text" id="exampleTextbox" name="exampleTextbox" > </textarea>
+        <form>
+            <textarea type="text" id="exampleTextbox" value="Enter your comment here..." placeholder="Enter your comment here..." name="exampleTextbox" class="form-controll"> 
+            </textarea>
+        </form>
         <div class="mt-2">
             <row>
                 <button  class="btn btn-primary float-right" role="button">Post</button>
@@ -59,6 +46,5 @@ else{
         </div>
     </form>
 }
-</body>
 
 
