@@ -10,6 +10,8 @@ public class antappDbContext : DbContext
     public required DbSet<LocationTable> Locations { get; set; }
     public required DbSet<ChatTable> Chats { get; set; }
     public required DbSet<ChatEntryTable> ChatEntries { get; set; }
+    public required DbSet<AchivmentTable> Achivments { get; set; }
+    public required DbSet<UserAchivmentTable> UserAchivments { get; set; }
     public antappDbContext(DbContextOptions<antappDbContext> options) : base(options)
     {
 

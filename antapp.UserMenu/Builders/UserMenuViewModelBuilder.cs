@@ -27,7 +27,7 @@ internal class UserMenuViewModelBuilder : IUserMenuViewModelBuilder
         {
             UserName = userName,
             AntCollection = await _userAntsService.GetUserAnts(userId),
-            Achivments = new List<UserAchivment>()
+            Achivments = await _userAntsService.GetUserAchivments(userId)
         };
     }
 }

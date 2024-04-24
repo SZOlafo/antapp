@@ -15,5 +15,4 @@ public class UserAntTable
     [ForeignKey("catchlocation")]
     public virtual LocationTable Location { get; set; }
     public required DateTime catchdate { get; set; }
-
 }

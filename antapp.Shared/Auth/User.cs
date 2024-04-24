@@ -4,4 +4,5 @@ namespace antapp.Shared.Auth;
 
 public class User : IdentityUser
 {
+
 }

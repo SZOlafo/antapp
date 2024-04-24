@@ -22,10 +22,24 @@
         <div id="ants-@Model.UserName" class="accordion-collapse collapse show" aria-labelledby="AntCollection">
             <div class="accordion-body">
                 <table class="table">
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Catch Date</th>
+                        <th>Catch Location</th>
+                    </tr>
                     @foreach (var ant in Model.AntCollection)
                     {
                         <tr>
+                            <td>
+                            <img src="~/images/@ant.ImageUrl" class="img-thumbnail rounded" style="height:100px;width:100px;"/>
+                            </td>
+                            
                             <td>@ant.Name</td>
+                            <td>@ant.Description</td>
+                            <td>@ant.CatchDate.ToString("dd.MM.yyyy")</td>
+                            <td>@ant.CatchLocation</td>
                         </tr>
                     }
                 </table>
@@ -44,7 +58,20 @@
 
         <div id="achivments-@Model.UserName" class="accordion-collapse collapse show" aria-labelledby="Achivments">
             <div class="accordion-body">
-                Achivment get
+                <table class="table">
+                    @foreach (var achivment in Model.Achivments)
+                    {
+                        <tr>
+                            <td>
+                            <img src="~/images/@achivment.ImageUrl" class="img-thumbnail rounded" style="height:100px;width:100px;"/>
+                            </td>
+                            
+                            <td>@achivment.Name</td>
+                            <td>@achivment.Description</td>
+                            <td>@achivment.AquireDate.ToString("dd.MM.yyyy")</td>
+                        </tr>
+                    }
+                </table>
             </div>
         </div>
     </div>
