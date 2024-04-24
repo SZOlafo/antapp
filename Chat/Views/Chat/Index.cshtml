@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Register Service";
+}
+@model antapp.Chat.ViewModels.ChatViewModel
+<head>
+    <title>Styled Textbox</title>
+    <style>
+        #exampleTextbox {
+            width: 800px;       /* Szerokość pola tekstowego */
+            height: 300px;       /* Wysokość pola tekstowego */
+            font-size: 20px;    /* Rozmiar czcionki w polu tekstowym */
+            padding: 10px;      /* Padding wewnątrz pola tekstowego */
+            border: 2px solid black; /* Grubość i kolor obramowania */
+            border-radius: 10px; /* Zaokrąglenie narożników obramowania */
+            background-color: #f8f8f8; /* Kolor tła pola tekstowego */
+        }
+    </style>
+</head>
+
+<body>
+
+@if(Model.Chat is null)
+{
+
+}
+else{
+    <div>
+    <h1>Chat</h1>
+</div>
+    <h2>@Model.Chat.Chatname</h2>
+    <h3 class="text-muted">@Model.Chat.Description</h3>
+    <table class="table">
+        @foreach(var x in Model.Entries)
+        {
+            <tr>
+                <td>
+                    <div class="card card bg-light mb-3" style="max-width: 90rem;">
+                        <div class="card-header">@x.userId</div>
+                        <div class="card-body">
+                         
+                        <p class="card-text">@x.message</p>
+                        </div>
+            
+               </td>
+            </tr>
+        }
+    </table>
+    <form>
+        <div>
+            <label for="exampleTextbox">Zostaw komentarz:</label>
+        </div>
+        <textarea type="text" id="exampleTextbox" name="exampleTextbox" > </textarea>
+        <div class="mt-2">
+            <row>
+                <button  class="btn btn-primary float-right" role="button">Post</button>
+                <a href="/ChatList"  class="btn btn-outline-info float-right" role="button">Back</a>
+            </row>
+        </div>
+    </form>
+}
+</body>
+
+

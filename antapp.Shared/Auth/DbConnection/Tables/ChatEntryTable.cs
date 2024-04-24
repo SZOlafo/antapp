@@ -15,12 +15,12 @@ namespace antapp.Shared.Auth.DbConnection.Tables
         public int id { get; set; }
         public required string message { get; set; }
         public required bool messagevisibility {  get; set; }
-        public required DateOnly EntryDate { get; set; }
+        public required DateOnly entrydate { get; set; }
 
         [ForeignKey("chatId")]
-        public required int chatId { get; set; }
+        public required int chatid { get; set; }
 
         [ForeignKey("userId")]
-        public required string userId { get; set; }
+        public required string userid { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using antapp.Chat.Builders;
+using antapp.Chat.Models;
 using antapp.Chat.Services;
 using antapp.Shared.Auth.Dtos;
 using Microsoft.AspNetCore.Authorization;

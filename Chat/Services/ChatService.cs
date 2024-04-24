@@ -1,7 +1,9 @@
-﻿using antapp.Shared.Auth;
+﻿using antapp.Chat.Models;
+using antapp.Shared.Auth;
 using antapp.Shared.Auth.DbConnection;
 using antapp.Shared.Auth.DbConnection.Tables;
 using antapp.Shared.Auth.Dtos;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace antapp.Chat.Services;
@@ -13,16 +15,21 @@ public interface IChatService
     Task DeleteChatEntry(int entryId);
     Task EditChatEntry(ChatEntryDto entry, string user);
     Task AddChatEntry(ChatEntryDto entryId, string user);
+
+    Task<String> GetUserName(string userd);
+
 }
 
 internal class ChatService : IChatService
 {
     private readonly antappDbContext _dbContext;
+    private readonly UserManager<User> _userManager;
 
 
-    public ChatService(antappDbContext dbContext)
+    public ChatService(antappDbContext dbContext, UserManager<User> userManager)
     {
         _dbContext = dbContext;
+        _userManager = userManager;
     }
 
     public async Task<ChatDto?> GetChat(int chatId)
@@ -34,24 +41,30 @@ internal class ChatService : IChatService
                 Id = x.id,
                 Description = x.description,
                 Chatname = x.chatname,
-                LocationId = x.Location.id,
+                Location = x.Location,
             }).FirstOrDefaultAsync();
     }
 
     public async Task<List<ChatEntryDto>> GetChatEntries(int chatId)
     {
-        return await _dbContext.ChatEntries
-            .Where(e => e.chatId == chatId)
-            .OrderBy(e => e.EntryDate)
+        var entries = await _dbContext.ChatEntries
+            .Where(e => e.chatid == chatId)
+            .OrderBy(e => e.entrydate)
             .Select(x => new ChatEntryDto
             {
                 Id = x.id,
                 message = x.message,
                 messageVisibility = x.messagevisibility,
-                EntryDate = x.EntryDate,
-                chatId = x.chatId,
-                userId = x.userId
+                EntryDate = x.entrydate,
+                chatId = x.chatid,
+                userId = x.userid
             }).ToListAsync();
+
+        foreach(var entry in entries)
+        {
+            entry.userId = await GetUserName(entry.userId);
+        }
+        return entries;
     }
 
     public async Task DeleteChatEntry(int entryId)
@@ -73,9 +86,9 @@ internal class ChatService : IChatService
             {
                 message = entry.message,
                 messagevisibility = entry.messageVisibility,
-                EntryDate = entry.EntryDate,
-                chatId = entry.chatId,
-                userId = user,
+                entrydate = entry.EntryDate,
+                chatid = entry.chatId,
+                userid = user,
             };
             await _dbContext.ChatEntries.AddAsync(newEntry);
             await _dbContext.SaveChangesAsync();
@@ -91,6 +104,13 @@ internal class ChatService : IChatService
             await _dbContext.SaveChangesAsync();
         }
         //await _dbContext.ChatEntries.Where(x => x.id == entry.Id).ExecuteUpdateAsync(x => x.SetProperty(y => y.message, entry.message));
+    }
+
+    public async Task<string> GetUserName(string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        var userName = user.UserName;
+        return userName;
     }
 }
 

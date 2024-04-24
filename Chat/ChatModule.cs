@@ -10,6 +10,8 @@ public static class ChatModule
     {
         services.AddScoped<IChatViewModelBuilder, ChatViewModelBuilder>();
         services.AddScoped<IChatService, ChatService>();
+        services.AddScoped<IChatListViewModelBuilder, ChatListViewModelBuilder>();
+        services.AddScoped<IChatListService, ChatListService>();
     }
 
 }
