@@ -1,0 +1,47 @@
+﻿@using antapp.Chat.Models
+
+@model antapp.Chat.ViewModels.ChatListViewModel
+
+@{
+    ViewBag.Title = "Chats";
+}
+
+<body>
+    <div>
+        <h1>Dostępne chaty</h1>
+    </div>
+    @if (Model.Chats is null)
+    {
+        <h2>Brak dostępnych chatów</h2>
+    }
+    else
+    {
+        <div class="accordion id="accordionPage">
+            @foreach(var x in Model.Chats){
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="header-@x.Id">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#event-@x.Id" aria-expanded="false" aria-controls="event-@x.Id">
+                            <h4>@x.Chatname</h4>
+                        </button>
+                    </h3>
+
+                    <div id="event-@x.Id" class="accordion-collapse collapse show" aria-labelledby="header-@x.Id" data-bs-parent="#accordionPage">
+                        <div class="accordion-body">
+                            <h5>@x.Description</h5>
+
+                            <row>
+
+                                <div class="col d-flex justify-content-between">
+                                    <a href="/Agenda?eventId=@x.Id" class="btn btn-success float-right" role="button">Wejdź na chat</a>
+
+                                </div>
+                            </row>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+}
+    
+</body>

@@ -19,6 +19,7 @@ internal class ChatViewModelBuilder : IChatViewModelBuilder
 
     public async Task<ChatViewModel> Build(int chatId)
     {
+     
         return new ChatViewModel
         {
             Chat = await _chatService.GetChat(chatId),
