@@ -11,7 +11,7 @@ namespace antapp.Chat.Services
 {
     public interface IChatListService
     {
-        Task<List<ChatDto?>> GetChat();
+        Task<List<ChatDto>> GetChat();
     }
     internal class ChatListService : IChatListService
     {
@@ -22,7 +22,7 @@ namespace antapp.Chat.Services
             _dbContext = dbContext;
         }
 
-        public async Task<List<ChatDto?>> GetChat()
+        public async Task<List<ChatDto>> GetChat()
         {
             return await _dbContext.Chats
                 .Select(x => new ChatDto

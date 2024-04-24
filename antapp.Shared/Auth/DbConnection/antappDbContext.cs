@@ -5,6 +5,7 @@ namespace antapp.Shared.Auth.DbConnection;
 
 public class antappDbContext : DbContext
 {
+    public required DbSet<AspUserTable> Users { get; set; }
     public required DbSet<AntTable> Ants { get; set; }
     public required DbSet<UserAntTable> UserAnts { get; set; }
     public required DbSet<LocationTable> Locations { get; set; }
