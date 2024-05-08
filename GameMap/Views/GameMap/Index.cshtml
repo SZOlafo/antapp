@@ -28,6 +28,7 @@
 
     // var antId;
     // var locationId;
+    let markers = [];
 
 function AddSomeRandomMarkers() {
     var options = {
@@ -62,9 +63,10 @@ function AddSomeRandomMarkers() {
         google.maps.event.addListener(amarker, 'click', function () {
             infowindow = new google.maps.InfoWindow({ });
             infowindow.setContent(
-                        '<button onclick="catchAnt(' + antId + ', ' + locationId + ')">Catch</button>');
+                        '<button onclick="catchAnt(' + antId + ', ' + locationId + ', ' + index + ')">Catch</button>');
             infowindow.open(map, amarker);
         });
+        markers.push(amarker);
     }
 }
 
@@ -77,7 +79,8 @@ function AddSomeRandomMarkers() {
 
 
 <script>
-         async function catchAnt(antId, locationId) {
+         async function catchAnt(antId, locationId, index) {
+             markers[index].setMap(null);
         try {
             const request = {
                 AntId: antId,
