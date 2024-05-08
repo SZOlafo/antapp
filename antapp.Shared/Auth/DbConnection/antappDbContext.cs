@@ -20,13 +20,6 @@ public class antappDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        //builder.UseIdentityByDefaultColumns();
-        //builder.Entity<UserAntTable>()
-        //    .HasNoKey();
-
-        //builder.Entity<AntTable>()
-        //    .HasMany(e => e.UserAntCollection)
-        //    .WithOne(e => e.Ants)
-        //    .HasForeignKey(e => e.antid);
+        builder.UseIdentityByDefaultColumns();
     }
 }

@@ -16,6 +16,8 @@ public class RegisterServiceController : Controller
         _authenticationService = authenticationService;
     }
 
+    [HttpGet]
+    //[Route("[Controller]/[Action]")]
     public IActionResult Index()
     {
         return View();
@@ -23,6 +25,7 @@ public class RegisterServiceController : Controller
 
     [AllowAnonymous]
     [HttpPost]
+    //[Route("[Controller]/[Action]")]
     public async Task<IActionResult> Register([FromBody] RegisterRequestDto request)
     {
         var response = await _authenticationService.Register(request);

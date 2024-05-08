@@ -6,7 +6,6 @@
     ViewBag.Title = "Chats";
 }
 
-<body>
     <div>
         <h1>Dostępne chaty</h1>
     </div>
@@ -28,20 +27,10 @@
                     <div id="event-@x.Id" class="accordion-collapse collapse show" aria-labelledby="header-@x.Id" data-bs-parent="#accordionPage">
                         <div class="accordion-body">
                             <h5>@x.Description</h5>
-
-                            <row>
-
-                                <div class="col d-flex justify-content-between">
-                                    <a href="/Chat?chatId=@x.Id" class="btn btn-success float-right" role="button">Wejdź na chat</a>
-
-                                </div>
-                            </row>
-
+                            <a href="/Chat?chatId=@x.Id" class="btn btn-success float-right" role="button">Wejdź na chat</a>
                         </div>
                     </div>
                 </div>
             }
         </div>
 }
-    
-</body>

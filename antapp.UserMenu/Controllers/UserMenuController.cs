@@ -16,6 +16,8 @@ public class UserMenuController : Controller
         _modelBuilder = modelBuilder;
     }
 
+    [HttpGet]
+    //[Route("[Controller]/[Action]")]
     public async Task<IActionResult> Index() 
     {
         string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

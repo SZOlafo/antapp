@@ -34,9 +34,9 @@ internal class UserAntService : IUserAntsService
 
     public async Task<List<UserAnt>> GetUserAnts(string userId)
     {
-        var userName = GetUserName("9eb1f47a-d5f1-43d9-b5bc-74e91b5fda99");
         return await _db.UserAnts
             .Where(x => x.userid == userId)
+            .OrderBy(o => o.catchdate)
             .Select(x => new UserAnt
             {
                 Id = x.Ants.id,

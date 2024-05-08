@@ -19,6 +19,8 @@ public class LoginServiceController : Controller
         _authenticationService = authenticationService;
     }
 
+    [HttpGet]
+    //[Route("[Controller]/[Action]")]
     public IActionResult Index()
     {
         //var userName = User.Identity.Name;
@@ -28,6 +30,7 @@ public class LoginServiceController : Controller
 
     [AllowAnonymous]
     [HttpPost]
+    //[Route("[Controller]/[Action]")]
     public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
     {
         var response = await _authenticationService.Login(request);

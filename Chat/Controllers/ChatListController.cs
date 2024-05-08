@@ -21,6 +21,8 @@ namespace antapp.Chat.Controllers
             _chatListService = chatListService;
         }
 
+        [HttpGet]
+        //[Route("[Controller]/[Action]")]
         public async Task<IActionResult> Index()
         {
             var viewModel = await _builder.Build();
@@ -28,6 +30,7 @@ namespace antapp.Chat.Controllers
         }
 
         [HttpPost]
+        //[Route("[Controller]/[Action]")]
         public async Task<IActionResult> GetChat()
         {
             await _chatListService.GetChat();
