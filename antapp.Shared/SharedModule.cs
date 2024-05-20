@@ -16,5 +16,6 @@ public static class SharedModule
         services.AddDbContext<AppDbContext>(options => options.UseNpgsql(db));
         services.AddDbContext<antappDbContext>(options => options.UseNpgsql(db));
         services.AddScoped<IAuthenticationService, AuthenticationService>();
+        services.AddSingleton(Random.Shared);
     }
 }

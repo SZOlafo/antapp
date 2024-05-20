@@ -7,7 +7,7 @@ namespace antapp.Shared.Auth.DbConnection.Tables;
 public class UserAntTable
 {
     [Key]
-    public required int id { get; set; }
+    public int id { get; set; }
     [ForeignKey("userid")]
     public required string userid {  get; set; }
     [ForeignKey("antid")]

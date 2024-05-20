@@ -20,6 +20,8 @@ public class ChatController : Controller
         _chatService = chatService;
     }
 
+    [HttpGet]
+    //[Route("[Controller]/[Action]")]
     public async Task<IActionResult> Index([FromQuery] int chatId)
     {
         var viewModel = await _builder.Build(chatId);
@@ -27,6 +29,7 @@ public class ChatController : Controller
     }
 
     [HttpPost]
+    //[Route("[Controller]/[Action]")]
     public async Task<IActionResult> AddEntry([FromBody] ChatEntryDto entry)
     {
         var user = User.FindFirstValue(ClaimTypes.NameIdentifier);

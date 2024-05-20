@@ -1,18 +1,101 @@
-﻿
-<div class="text-center">
-    <iframe width="600"
-            height="450"
-            style="border:0"
-            loading="lazy"
-            allowfullscreen
-            referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC6vUtCrF3B1OfZgnCvu6U2EhWT8c0dK9g
-    &q=Space,Park Stanisława Tołpy+WA">
-    </iframe>
-</div>
-<div class="text-center">
-    <button type="button" class="btn btn-primary">Game Action 1</button>
-    <button type="button" class="btn btn-secondary">Game Action 2</button>
-    <button type="button" class="btn btn-info">Game Action 3</button>
-    <button type="button" class="btn btn-danger">Game Action 4</button>
-</div>
+﻿@using antapp.GameMap.ViewModels;
+@using antapp.GameMap.Models;
+@model GameMapViewModel
+
+@{
+    ViewBag.Title = "ASP.NET Core – Google Maps API";
+}
+
+<fieldset>
+    <legend style="font-family: 'Segoe UI'; color: rgb(73,171,210); font-size: large;">@Model.Location.Name</legend>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <div id="googleMap" style="height:700px;width:100%;"></div>
+<script>
+    function myMap() {
+    var myCenter = new google.maps.LatLng(@Model.Location.Coordinates);
+    var mapProp = { center: myCenter, zoom: 10, scrollwheel: false, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
+    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+    var marker = new google.maps.Marker({ position: myCenter });
+    marker.setMap(map);
+}
+
+    // var antId;
+    // var locationId;
+    let markers = [];
+
+function AddSomeRandomMarkers() {
+    var options = {
+        zoom: 18,
+        center: new google.maps.LatLng(@Model.Location.Coordinates),
+        mapTypeId: google.maps.MapTypeId.TERRAIN,
+        mapTypeControl: false,
+        scrollwheel: true,
+        mapId: "@Model.Location.Name"
+    };
+
+    // inicjalizacja mapy
+    var map = new google.maps.Map(document.getElementById('googleMap'), options);
+
+    const antLocations = @Html.Raw(Json.Serialize(Model.AntLocations));
+    const locationId = @Model.Location.Id;
+
+    for(let [index, location] of antLocations.entries()) {
+        const iconImage = document.createElement("img");
+        iconImage.src = location.ant.imageUrl;
+        iconImage.style.height = "50px"
+        iconImage.style.width = "50px"
+
+        const coordinates = location.coordinates.split(",");
+        const antId = location.ant.id;
+        const amarker = new google.maps.marker.AdvancedMarkerElement({
+            map: map,
+            position: new google.maps.LatLng(coordinates[0], coordinates[1]),
+            content: iconImage,
+            title: location.ant.name,
+        });
+        google.maps.event.addListener(amarker, 'click', function () {
+            infowindow = new google.maps.InfoWindow({ });
+            infowindow.setContent(
+                        '<button onclick="catchAnt(' + antId + ', ' + locationId + ', ' + index + ')">Catch</button>');
+            infowindow.open(map, amarker);
+        });
+        markers.push(amarker);
+    }
+}
+
+    </script>
+
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6vUtCrF3B1OfZgnCvu6U2EhWT8c0dK9g&callback=AddSomeRandomMarkers&libraries=marker"></script>
+</fieldset>
+
+
+<script>
+         async function catchAnt(antId, locationId, index) {
+             markers[index].setMap(null);
+        try {
+            const request = {
+                AntId: antId,
+                LocationId: locationId
+            }
+            await fetch('/GameMap/Catch', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(request)
+            });
+            //window.location.href = '/UserMenu'
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+</script>

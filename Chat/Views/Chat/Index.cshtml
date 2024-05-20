@@ -6,43 +6,26 @@
 
 @if(Model.Chat is null)
 {
-
+    <h3>No chat with this id.</h3>
 }
 else{
-    <div>
-    <h1>Chat</h1>
-</div>
     <h2>@Model.Chat.Chatname</h2>
     <h3 class="text-muted">@Model.Chat.Description</h3>
-    <table class="table">
         @foreach(var x in Model.Entries)
         {
-            <tr>
-                <td>
-                    <div class="card card bg-light mb-3" style="max-width: 90rem;">
-                        <div class="card-header">@x.userId</div>
-                        <div class="card-body">
-                         
-                        <p class="card-text">@x.message</p>
-                    </div>
-                </div>
-               </td>
-            </tr>
+            <div class="card card bg-light mb-3" style="max-width: 90rem;">
+                <div class="card-header">@x.userId</div>
+                <div class="card-body">            
+                    <p class="card-text">@x.message</p>
+            </div>
+            </div>
         }
-    </table>
-    <form>
-        <div>
-            <label for="exampleTextbox">Leave a comment:</label>
-        </div>
-        <form>
-            <textarea type="text" id="exampleTextbox" value="Enter your comment here..." placeholder="Enter your comment here..." name="exampleTextbox" class="form-controll"> 
-            </textarea>
-        </form>
-        <div class="mt-2">
-            <row>
-                <button  class="btn btn-primary float-right" role="button">Post</button>
-                <a href="/ChatList"  class="btn btn-outline-info float-right" role="button">Back</a>
-            </row>
+    <form id="newForm">
+        <label for="exampleTextbox" >Leave a comment:</label>
+        <textarea placeholder="Enter your comment here..." class="form-control"></textarea>
+        <div class="mt-2 col d-flex justify-content-between">
+            <button  class="btn btn-primary" role="button">Post</button>
+            <a href="/ChatList"  class="btn btn-outline-info" role="button">Back</a>
         </div>
     </form>
 }

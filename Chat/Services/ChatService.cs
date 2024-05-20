@@ -47,7 +47,7 @@ internal class ChatService : IChatService
 
     public async Task<List<ChatEntryDto>> GetChatEntries(int chatId)
     {
-        var entries = await _dbContext.ChatEntries
+        return await _dbContext.ChatEntries
             .Where(e => e.chatid == chatId)
             .OrderBy(e => e.entrydate)
             .Select(x => new ChatEntryDto
@@ -57,14 +57,14 @@ internal class ChatService : IChatService
                 messageVisibility = x.messagevisibility,
                 EntryDate = x.entrydate,
                 chatId = x.chatid,
-                userId = x.userid
+                userId = x.User.UserName
             }).ToListAsync();
 
-        foreach(var entry in entries)
-        {
-            entry.userId = await GetUserName(entry.userId);
-        }
-        return entries;
+        //foreach(var entry in entries)
+        //{
+        //    entry.userId = await GetUserName(entry.userId);
+        //}
+        //return entries;
     }
 
     public async Task DeleteChatEntry(int entryId)

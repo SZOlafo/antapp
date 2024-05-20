@@ -5,6 +5,7 @@ namespace antapp.Shared.Auth.DbConnection;
 
 public class antappDbContext : DbContext
 {
+    public required DbSet<AspUserTable> Users { get; set; }
     public required DbSet<AntTable> Ants { get; set; }
     public required DbSet<UserAntTable> UserAnts { get; set; }
     public required DbSet<LocationTable> Locations { get; set; }
@@ -19,13 +20,6 @@ public class antappDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        //builder.UseIdentityByDefaultColumns();
-        //builder.Entity<UserAntTable>()
-        //    .HasNoKey();
-
-        //builder.Entity<AntTable>()
-        //    .HasMany(e => e.UserAntCollection)
-        //    .WithOne(e => e.Ants)
-        //    .HasForeignKey(e => e.antid);
+        builder.UseIdentityByDefaultColumns();
     }
 }
