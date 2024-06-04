@@ -14,22 +14,26 @@ namespace antapp.Shared.Auth.Services;
 
 public interface IAuthenticationService
 {
-    Task<string> Register(RegisterRequestDto request);
-    Task<string> Login(LoginRequestDto request);
+    Task Register(RegisterRequestDto request);
+    Task Login(LoginRequestDto request);
+    Task Logout();
+    bool IsAuth();
 }
 
 public class AuthenticationService : IAuthenticationService
 {
     private readonly UserManager<User> _userManager;
     private readonly IConfiguration _configuration;
+    private readonly IHttpContextAccessor _contextAccessor;
 
-    public AuthenticationService(UserManager<User> userManager, IConfiguration configuration)
+    public AuthenticationService(UserManager<User> userManager, IConfiguration configuration, IHttpContextAccessor contextAccessor)
     {
         _userManager = userManager;
         _configuration = configuration;
+        _contextAccessor = contextAccessor;
     }
 
-    public async Task<string> Register(RegisterRequestDto request)
+    public async Task Register(RegisterRequestDto request)
     {
         var userByEmail = await _userManager.FindByEmailAsync(request.Email);
         var userByUsername = await _userManager.FindByNameAsync(request.UserName);
@@ -51,11 +55,10 @@ public class AuthenticationService : IAuthenticationService
         {
             throw new ArgumentException($"Unable to register user {request.UserName} errors: {GetErrorsText(result.Errors)}");
         }
-
-        return await Login(new LoginRequestDto { UserName = request.Email, Password = request.Password });
+        await Login(new LoginRequestDto { UserName = request.Email, Password = request.Password });
     }
 
-    public async Task<string> Login(LoginRequestDto request)
+    public async Task Login(LoginRequestDto request)
     {
         var user = await _userManager.FindByNameAsync(request.UserName);
 
@@ -78,8 +81,14 @@ public class AuthenticationService : IAuthenticationService
         };
 
         var token = GetToken(authClaims);
-        
-        return new JwtSecurityTokenHandler().WriteToken(token);
+        var returnToken = new JwtSecurityTokenHandler().WriteToken(token);
+        _contextAccessor.HttpContext?.Response.Cookies.Append("AuthToken", returnToken, new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true,
+            Expires = DateTimeOffset.Now.AddHours(1),
+            SameSite = SameSiteMode.Strict
+        });
     }
 
     private JwtSecurityToken GetToken(IEnumerable<Claim> authClaims)
@@ -99,5 +108,18 @@ public class AuthenticationService : IAuthenticationService
     private string GetErrorsText(IEnumerable<IdentityError> errors)
     {
         return string.Join(", ", errors.Select(error => error.Description).ToArray());
+    }
+
+    public bool IsAuth()
+    {
+        var context = _contextAccessor.HttpContext;
+        return context?.User?.Identity?.IsAuthenticated ?? false;
+    }
+
+    public Task Logout()
+    {
+        var context = _contextAccessor.HttpContext;
+        context?.Response.Cookies.Delete("AuthToken");
+        return Task.CompletedTask;
     }
 }

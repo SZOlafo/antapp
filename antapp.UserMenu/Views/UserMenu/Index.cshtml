@@ -12,14 +12,14 @@
 </div>
 
 <div class="accordion" id="AntCollection">
-    <div class="accordionItem">
+    <div class="accordion-item">
         <h2 class="accordion-header" id="header-@Model.UserName" >
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#ants-@Model.UserName" aria-expanded="false" aria-controls="ants-@Model.UserName">
                 <div>Ant Collection</div>
             </button>
         </h2>
 
-        <div id="ants-@Model.UserName" class="accordion-collapse collapse show" aria-labelledby="AntCollection">
+        <div id="ants-@Model.UserName" class="accordion-collapse collapse show" aria-labelledby="ants" data-bs-parent="#accordionPage">
             <div class="accordion-body">
                 <table class="table">
                     <tr>
@@ -49,7 +49,7 @@
 </div>
 
 <div class="accordion" id="Achivments">
-    <div class="accordionItem">
+    <div class="accordion-item">
         <h2 class="accordion-header" id="header2-@Model.UserName">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#achivments-@Model.UserName" aria-expanded="false" aria-controls="achivments-@Model.UserName">
                 <div>Achivments</div>

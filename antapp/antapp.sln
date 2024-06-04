@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "antapp.Chat", "..\Chat\anta
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "antapp.GameMap", "..\GameMap\antapp.GameMap.csproj", "{BAC4AE9D-E6C7-4781-8601-C2922D59DE77}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "antapp.LeaderBoard", "..\antapp.LeaderBoard\antapp.LeaderBoard.csproj", "{73DE4BF6-BA7F-405F-AA41-B61FD577EACA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{BAC4AE9D-E6C7-4781-8601-C2922D59DE77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAC4AE9D-E6C7-4781-8601-C2922D59DE77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAC4AE9D-E6C7-4781-8601-C2922D59DE77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73DE4BF6-BA7F-405F-AA41-B61FD577EACA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73DE4BF6-BA7F-405F-AA41-B61FD577EACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73DE4BF6-BA7F-405F-AA41-B61FD577EACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73DE4BF6-BA7F-405F-AA41-B61FD577EACA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +62,7 @@ Global
 		{C9A0C18F-8F28-4267-BBE8-9EE04A4CA59D} = {1025C603-C0A9-4D92-93AD-5933765758A3}
 		{5FEBD965-C53F-481B-9808-2448D0605977} = {1025C603-C0A9-4D92-93AD-5933765758A3}
 		{BAC4AE9D-E6C7-4781-8601-C2922D59DE77} = {1025C603-C0A9-4D92-93AD-5933765758A3}
+		{73DE4BF6-BA7F-405F-AA41-B61FD577EACA} = {1025C603-C0A9-4D92-93AD-5933765758A3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0493125C-09EF-46A6-9531-34C156341B66}

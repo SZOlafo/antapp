@@ -14,20 +14,46 @@ else{
         @foreach(var x in Model.Entries)
         {
             <div class="card card bg-light mb-3" style="max-width: 90rem;">
-                <div class="card-header">@x.userId</div>
+                <div class="card-header">@x.UserId</div>
                 <div class="card-body">            
-                    <p class="card-text">@x.message</p>
+                    <p class="card-text">@x.Message</p>
             </div>
             </div>
         }
-    <form id="newForm">
-        <label for="exampleTextbox" >Leave a comment:</label>
-        <textarea placeholder="Enter your comment here..." class="form-control"></textarea>
-        <div class="mt-2 col d-flex justify-content-between">
-            <button  class="btn btn-primary" role="button">Post</button>
-            <a href="/ChatList"  class="btn btn-outline-info" role="button">Back</a>
-        </div>
+    <form id="Comment-form">
+        <label for="comment" >Leave a comment:</label>
+        <textarea name="comment" placeholder="Enter your comment here..." class="form-control"></textarea>
     </form>
+        <div class="mt-2 col d-flex justify-content-between">
+            <button  class="btn btn-primary" onclick="addComment(@Model.Chat.Id, 'Comment-form')">Post</button>
+            <a href="/ChatList"  class="btn btn-outline-info">Back</a>
+        </div>
+
 }
+
+<script>
+        async function addComment(chatId, formId) {
+        const commentForm = document.getElementById(formId);
+        const formData = new FormData(commentForm);
+        const formProps = Object.fromEntries(formData);
+        console.log(formProps.description);
+        try {
+            const request = {
+                chatId: chatId,
+                text: formProps.comment
+            }
+            await fetch('/Chat/AddComment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(request)
+            })
+            window.location.reload();
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+</script>
 
 

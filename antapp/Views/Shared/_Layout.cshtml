@@ -1,5 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using antapp.Shared.Auth.Services
+<!DOCTYPE html>
 <html lang="en">
+
+@inject IAuthenticationService authService
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,21 +23,35 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/GameMap?LocationId=1">GameMap</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="UserMenu" asp-action="Index">UserMenu</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ChatList" asp-action="Index">Chat</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="LoginService" asp-action="Index">LoginService</a>
-                        </li>
+                        @if (authService.IsAuth())
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="/GameMap?LocationId=1">GameMap</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="UserMenu" asp-action="Index">UserMenu</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="ChatList" asp-action="Index">Chat</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="LeaderBoard" asp-action="Index">Leaderboard</a>
+                            </li>
+                            <li class="flex-grow-1"></li>
+                            <li>
+                                <button class="btn btn-outline-danger" onclick="logout()">Log out</button>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="flex-grow-1"></li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="LoginService" asp-action="Index">Log in</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="RegisterService" asp-action="Index">Register</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -53,6 +71,22 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        async function logout() {
+            try {
+                await fetch('/LoginService/Logout', {
+                    method: "GET",
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                window.location.href = '/Home'
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    </script>
 
 
     @await RenderSectionAsync("Scripts", required: false)

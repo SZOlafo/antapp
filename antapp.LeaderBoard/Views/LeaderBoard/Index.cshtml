@@ -1,0 +1,22 @@
+﻿@model antapp.LeaderBoard.ViewModels.LeaderBoardViewModel
+
+@{
+    ViewBag.Title = "LeaderBoard";
+}
+
+<h2>Hall of fame:</h2>
+<table class="table">
+    <tr>
+        <th class="text-center" style="width: 5%"></th>
+        <th><h4>User</h4></th>
+        <th class="text-center" style="width: 20%"><h4>Ants Cought</h4></th>
+    </tr>
+    @foreach(var x in Model.Users.Select((pos, i) => (pos, i) ))
+    {
+        <tr>
+            <td class="text-center" style="width: 5%">@(x.i + 1)</td>
+            <td>@x.pos.UserName</td>
+            <td class="text-center" style="width: 20%">@x.pos.Score</td>
+        </tr>
+    }
+</table>

@@ -5,17 +5,29 @@
 @{
     ViewBag.Title = "ASP.NET Core – Google Maps API";
 }
+<div class="d-flex flex-row">
+    <div style="width:18%">
+        <h4>Change Location:</h4>
+        <ul class="list-group">
+            @foreach(var loc in Model.LocationList){
+                @if(loc.Id == Model.Location.Id)
+                {
+                <li class="list-group-item active">
+                <a class="nav-link text-dark" href="/GameMap?LocationId=@loc.Id">@loc.Name</a>
+                </li>
+                } else{
+                <li class="list-group-item">
+                <a class="nav-link text-dark" href="/GameMap?LocationId=@loc.Id">@loc.Name</a>
+                </li>
+                }
+            }
 
+         </ul>
+    </div>
+<div style="width:2%"></div>
+<div style="width:80%">
 <fieldset>
-    <legend style="font-family: 'Segoe UI'; color: rgb(73,171,210); font-size: large;">@Model.Location.Name</legend>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <legend style="font-family: 'Segoe UI'; color: rgb(73,171,210); font-size: huge;">@Model.Location.Name</legend>
     <div id="googleMap" style="height:700px;width:100%;"></div>
 <script>
     function myMap() {
@@ -76,7 +88,8 @@ function AddSomeRandomMarkers() {
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6vUtCrF3B1OfZgnCvu6U2EhWT8c0dK9g&callback=AddSomeRandomMarkers&libraries=marker"></script>
 </fieldset>
-
+</div>
+</div>
 
 <script>
          async function catchAnt(antId, locationId, index) {

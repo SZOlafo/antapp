@@ -4,6 +4,7 @@ using antapp.Chat;
 using antapp.GameMap;
 using antapp.LoginService;
 using antapp.Shared;
+using antapp.LeaderBoard;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Configuration;
@@ -31,6 +32,7 @@ builder.Services.AddUserMenuModule();
 builder.Services.AddChatModule();
 builder.Services.AddGameMapModule();
 builder.Services.AddLoginServiceModule();
+builder.Services.AddLeaderBoardModule();
 
 //builder.Services.AddMvc();
 //builder.Services.AddSwaggerGen();

@@ -33,16 +33,15 @@ public class LoginServiceController : Controller
     //[Route("[Controller]/[Action]")]
     public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
     {
-        var response = await _authenticationService.Login(request);
+        await _authenticationService.Login(request);
+        return Ok();
+    }
 
-        Response.Cookies.Append("AuthToken", response, new CookieOptions
-        {
-            HttpOnly = true,
-            Secure = true,
-            Expires = DateTimeOffset.Now.AddHours(1),
-            SameSite = SameSiteMode.Strict
-        });
-        return Ok(response);
+    [HttpGet]
+    public async Task<IActionResult> LogOut()
+    {
+        await _authenticationService.Logout();
+        return Ok();
     }
 }
 

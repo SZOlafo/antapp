@@ -14,7 +14,7 @@ public interface IChatService
     Task<List<ChatEntryDto>> GetChatEntries(int chatId);
     Task DeleteChatEntry(int entryId);
     Task EditChatEntry(ChatEntryDto entry, string user);
-    Task AddChatEntry(ChatEntryDto entryId, string user);
+    Task AddChatEntry(Comment entryId, string user);
 
     Task<String> GetUserName(string userd);
 
@@ -53,11 +53,11 @@ internal class ChatService : IChatService
             .Select(x => new ChatEntryDto
             {
                 Id = x.id,
-                message = x.message,
-                messageVisibility = x.messagevisibility,
+                Message = x.message,
+                MessageVisibility = x.messagevisibility,
                 EntryDate = x.entrydate,
-                chatId = x.chatid,
-                userId = x.User.UserName
+                ChatId = x.chatid,
+                UserId = x.User.UserName
             }).ToListAsync();
 
         //foreach(var entry in entries)
@@ -78,16 +78,16 @@ internal class ChatService : IChatService
         //await _dbContext.ChatEntries.Where(e => e.id == entryId).ExecuteDeleteAsync();
     }
 
-    public async Task AddChatEntry(ChatEntryDto entry, string user)
+    public async Task AddChatEntry(Comment entry, string user)
     {
         if(entry is not null)
         {
             var newEntry = new ChatEntryTable
             {
-                message = entry.message,
-                messagevisibility = entry.messageVisibility,
-                entrydate = entry.EntryDate,
-                chatid = entry.chatId,
+                message = entry.Text,
+                messagevisibility = true,
+                entrydate = DateOnly.FromDateTime(DateTime.Now),
+                chatid = entry.ChatId,
                 userid = user,
             };
             await _dbContext.ChatEntries.AddAsync(newEntry);
@@ -100,7 +100,7 @@ internal class ChatService : IChatService
         var toEdit = await _dbContext.ChatEntries.Where(x => x.id == entry.Id).FirstOrDefaultAsync();
         if(toEdit is not null)
         {
-            toEdit.message = entry.message;
+            toEdit.message = entry.Message;
             await _dbContext.SaveChangesAsync();
         }
         //await _dbContext.ChatEntries.Where(x => x.id == entry.Id).ExecuteUpdateAsync(x => x.SetProperty(y => y.message, entry.message));

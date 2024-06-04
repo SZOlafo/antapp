@@ -30,10 +30,10 @@ public class ChatController : Controller
 
     [HttpPost]
     //[Route("[Controller]/[Action]")]
-    public async Task<IActionResult> AddEntry([FromBody] ChatEntryDto entry)
+    public async Task<IActionResult> AddComment([FromBody] Comment request)
     {
         var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        await _chatService.AddChatEntry(entry, user);
+        await _chatService.AddChatEntry(request, user);
         return Json(new { success = true });
     }
 }

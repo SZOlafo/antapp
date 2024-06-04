@@ -25,16 +25,21 @@ namespace antapp.Chat.Controllers
         //[Route("[Controller]/[Action]")]
         public async Task<IActionResult> Index()
         {
-            var viewModel = await _builder.Build();
+            string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                return BadRequest();
+            }
+            var viewModel = await _builder.Build(userId);
             return View(viewModel);
         }
 
-        [HttpPost]
-        //[Route("[Controller]/[Action]")]
-        public async Task<IActionResult> GetChat()
-        {
-            await _chatListService.GetChat();
-            return Json(new {success = true});
-        }
+        //[HttpPost]
+        ////[Route("[Controller]/[Action]")]
+        //public async Task<IActionResult> GetChat()
+        //{
+        //    await _chatListService.GetChat();
+        //    return Json(new {success = true});
+        //}
     }
 }

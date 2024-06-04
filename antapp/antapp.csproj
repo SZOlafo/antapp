@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\antapp.LeaderBoard\antapp.LeaderBoard.csproj" />
     <ProjectReference Include="..\antapp.Shared\antapp.Shared.csproj" />
     <ProjectReference Include="..\antapp.UserMenu\antapp.UserMenu.csproj" />
     <ProjectReference Include="..\Chat\antapp.Chat.csproj" />
