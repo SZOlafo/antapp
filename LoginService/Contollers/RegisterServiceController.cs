@@ -28,14 +28,7 @@ public class RegisterServiceController : Controller
     //[Route("[Controller]/[Action]")]
     public async Task<IActionResult> Register([FromBody] RegisterRequestDto request)
     {
-        var response = await _authenticationService.Register(request);
-        Response.Cookies.Append("AuthToken", response, new CookieOptions
-        {
-            HttpOnly = true,
-            Secure = true,
-            Expires = DateTimeOffset.Now.AddHours(1),
-            SameSite = SameSiteMode.Strict
-        });
-        return Ok(response);
+        await _authenticationService.Register(request);
+        return Ok();
     }
 }

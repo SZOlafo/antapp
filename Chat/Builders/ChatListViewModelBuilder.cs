@@ -1,12 +1,13 @@
 ﻿using antapp.Chat.Services;
 using antapp.Chat.ViewModels;
+using antapp.Shared.Auth;
 
 
 namespace antapp.Chat.Builders;
 
 public interface IChatListViewModelBuilder
 {
-    Task<ChatListViewModel> Build();
+    Task<ChatListViewModel> Build(string userId);
 }
 internal class ChatListViewModelBuilder: IChatListViewModelBuilder
 {
@@ -17,11 +18,11 @@ internal class ChatListViewModelBuilder: IChatListViewModelBuilder
         _chatListService = chatListService;
     }
 
-    public async Task<ChatListViewModel> Build()
+    public async Task<ChatListViewModel> Build(string userId)
     {
         return new ChatListViewModel
         {
-            Chats = await _chatListService.GetChat(),
+            Chats = await _chatListService.GetChat(userId),
         };
     }
 }

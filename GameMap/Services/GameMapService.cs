@@ -27,8 +27,8 @@ internal class GameMapService : IGameMapService
     public async Task CathAnt(string userId, int locationId, int antId)
     {
         var ant = await _antappDbContext.Ants.Where(x => x.id == antId).FirstOrDefaultAsync();
-        var location = await _antappDbContext.Locations.Where(x => x.id ==  locationId).FirstOrDefaultAsync();
-        if((ant is null) || (location is null)) 
+        var location = await _antappDbContext.Locations.Where(x => x.id == locationId).FirstOrDefaultAsync();
+        if ((ant is null) || (location is null))
         {
             return;
         }
@@ -45,7 +45,7 @@ internal class GameMapService : IGameMapService
 
     public async Task<Location> getLocation(int locationId)
     {
-        
+
         var location = await _antappDbContext.Locations.Where(l => l.id == locationId).Select(x => new Location
         {
             Id = x.id,
@@ -53,7 +53,7 @@ internal class GameMapService : IGameMapService
             Coordinates = x.coordinates,
             Range = x.range
         }).FirstOrDefaultAsync();
-        if(location is not null)
+        if (location is not null)
         {
             return location;
         }
@@ -67,11 +67,13 @@ internal class GameMapService : IGameMapService
     {
         return await _antappDbContext.Locations.Select(x => new Location
         {
-            Id= x.id,
+            Id = x.id,
             Name = x.locationname,
             Coordinates = x.coordinates,
             Range = x.range,
-        }).ToListAsync();
+        })
+            .OrderBy(x => x.Id)
+            .ToListAsync();
     }
 
     public async Task<Ant> getRandomAnt()

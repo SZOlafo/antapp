@@ -1,5 +1,6 @@
 ﻿using antapp.Shared.Auth;
 using antapp.Shared.Auth.DbConnection;
+using antapp.Shared.Auth.DbConnection.Tables;
 using antapp.UserMenu.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ public interface IUserAntsService
 {
     Task<List<UserAnt>> GetUserAnts(string userId);
     Task<List<UserAchivment>> GetUserAchivments(string userId);
+    Task UpdateAchivments(string userId);
 }
 
 internal class UserAntService : IUserAntsService
@@ -36,7 +38,7 @@ internal class UserAntService : IUserAntsService
     {
         return await _db.UserAnts
             .Where(x => x.userid == userId)
-            .OrderBy(o => o.catchdate)
+            .OrderByDescending(o => o.catchdate)
             .Select(x => new UserAnt
             {
                 Id = x.Ants.id,
@@ -51,6 +53,7 @@ internal class UserAntService : IUserAntsService
 
     public async Task<List<UserAchivment>> GetUserAchivments(string userId)
     {
+        await UpdateAchivments(userId);
         return await _db.UserAchivments
             .Where(x => x.userid == userId)
             .Select(a => new UserAchivment
@@ -64,6 +67,106 @@ internal class UserAntService : IUserAntsService
                 Proggress = a.progress
             })
             .ToListAsync();
+    }
+
+    public async Task UpdateAchivments(string userId)
+    {
+        var achivments = await _db.Achivments.ToListAsync();
+        var userAchivs = await _db.UserAchivments.Where(x => x.userid == userId).Select(x => x.Achivment.id).ToListAsync();
+        var userAnts = await _db.UserAnts.Where(x => x.userid == userId).ToListAsync();
+        foreach(var achievement in achivments) 
+        {
+            if (userAchivs.Contains(achievement.id)) 
+            {
+                continue;
+            }
+            var achivType = achievement.requirement.Split(";");
+            switch (achivType[0])
+            {
+                case "Catch":
+                    var req = achivType[2].Split(",");
+                    switch (req[0])
+                    { 
+                        case "A":
+                            if (req[1] == "0")
+                            {
+                                var count = userAnts.Count();
+                                if(count >= Int32.Parse(achivType[1]))
+                                {
+                                    var newAchivment = new UserAchivmentTable
+                                    {
+                                        userid = userId,
+                                        Achivment = achievement,
+                                        aquiredate = DateOnly.FromDateTime(DateTime.Now),
+                                        progress = "Completed"
+                                    };
+                                    await _db.UserAchivments.AddAsync(newAchivment);
+                                    await _db.SaveChangesAsync();
+                                }
+                            }
+                            else
+                            {
+                                var ant = Int32.Parse(req[1]);
+                                var count = userAnts.Where(x => x.Ants.id == ant).Count();
+                                if (count >= Int32.Parse(achivType[1]))
+                                {
+                                    var newAchivment = new UserAchivmentTable
+                                    {
+                                        userid = userId,
+                                        Achivment = achievement,
+                                        aquiredate = DateOnly.FromDateTime(DateTime.Now),
+                                        progress = "Completed"
+                                    };
+                                    await _db.UserAchivments.AddAsync(newAchivment);
+                                    await _db.SaveChangesAsync();
+                                }
+                            }
+                            break;
+
+                        case "L":
+                            if (req[1] == "0")
+                            {
+                                var count = userAnts.Count();
+                                if (count >= Int32.Parse(achivType[1]))
+                                {
+                                    var newAchivment = new UserAchivmentTable
+                                    {
+                                        userid = userId,
+                                        Achivment = achievement,
+                                        aquiredate = DateOnly.FromDateTime(DateTime.Now),
+                                        progress = "Completed"
+                                    };
+                                    await _db.UserAchivments.AddAsync(newAchivment);
+                                    await _db.SaveChangesAsync();
+                                }
+                            }
+                            else
+                            {
+                                var loc = Int32.Parse(req[1]);
+                                var count = userAnts.Where(x => x.Location.id == loc).Count();
+                                if (count >= Int32.Parse(achivType[1]))
+                                {
+                                    var newAchivment = new UserAchivmentTable
+                                    {
+                                        userid = userId,
+                                        Achivment = achievement,
+                                        aquiredate = DateOnly.FromDateTime(DateTime.Now),
+                                        progress = "Completed"
+                                    };
+                                    await _db.UserAchivments.AddAsync(newAchivment);
+                                    await _db.SaveChangesAsync();
+                                }
+                            }
+                            break;
+                        default: 
+                            break;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 }
 

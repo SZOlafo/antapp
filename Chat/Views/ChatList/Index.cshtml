@@ -7,15 +7,15 @@
 }
 
     <div>
-        <h1>Dostępne chaty</h1>
+        <h1>Available chats:</h1>
     </div>
     @if (Model.Chats is null)
     {
-        <h2>Brak dostępnych chatów</h2>
+        <h2>No chats available.</h2>
     }
     else
     {
-        <div class="accordion id="accordionPage">
+        <div class="accordion" id="accordionPage">
             @foreach(var x in Model.Chats){
                 <div class="accordion-item">
                     <h3 class="accordion-header" id="header-@x.Id">
@@ -27,7 +27,16 @@
                     <div id="event-@x.Id" class="accordion-collapse collapse show" aria-labelledby="header-@x.Id" data-bs-parent="#accordionPage">
                         <div class="accordion-body">
                             <h5>@x.Description</h5>
-                            <a href="/Chat?chatId=@x.Id" class="btn btn-success float-right" role="button">Wejdź na chat</a>
+                            @if(x.CatchCount >= 100){
+                            <a href="/Chat?chatId=@x.Id" class="btn btn-success float-right" role="button">See Chat</a>
+                            }
+                            else
+                            {
+                                <h5>Cath 5 ants in this park to unlock chat:</h5>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: @x.CatchCount%" aria-valuenow="@x.CatchCount" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
