@@ -5,6 +5,18 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "antapp", "antapp\antapp.csproj", "{D2F57A7D-997B-4D2C-886D-DF61A5C50E80}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "antapp.LeaderBoard", "antapp.LeaderBoard\antapp.LeaderBoard.csproj", "{BD38B61B-A278-4E3A-8274-44D0685BC296}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "antapp.Shared", "antapp.Shared\antapp.Shared.csproj", "{2287E2C6-F560-408F-8715-96DA9A4E0777}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "antapp.UserMenu", "antapp.UserMenu\antapp.UserMenu.csproj", "{7EAD0FF8-19FE-4285-AA4F-97013F46C242}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "antapp.Chat", "Chat\antapp.Chat.csproj", "{84AABFB9-F94E-47BB-B205-6ED6E5181FC8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "antapp.GameMap", "GameMap\antapp.GameMap.csproj", "{A3BD562F-A80F-4A7D-B14C-D3B502513563}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "antapp.LoginService", "LoginService\antapp.LoginService.csproj", "{D2406CC8-3105-4490-9C14-E72D8EB11EA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +27,30 @@ Global
 		{D2F57A7D-997B-4D2C-886D-DF61A5C50E80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2F57A7D-997B-4D2C-886D-DF61A5C50E80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2F57A7D-997B-4D2C-886D-DF61A5C50E80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD38B61B-A278-4E3A-8274-44D0685BC296}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD38B61B-A278-4E3A-8274-44D0685BC296}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD38B61B-A278-4E3A-8274-44D0685BC296}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD38B61B-A278-4E3A-8274-44D0685BC296}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2287E2C6-F560-408F-8715-96DA9A4E0777}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2287E2C6-F560-408F-8715-96DA9A4E0777}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2287E2C6-F560-408F-8715-96DA9A4E0777}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2287E2C6-F560-408F-8715-96DA9A4E0777}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EAD0FF8-19FE-4285-AA4F-97013F46C242}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EAD0FF8-19FE-4285-AA4F-97013F46C242}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EAD0FF8-19FE-4285-AA4F-97013F46C242}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EAD0FF8-19FE-4285-AA4F-97013F46C242}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84AABFB9-F94E-47BB-B205-6ED6E5181FC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84AABFB9-F94E-47BB-B205-6ED6E5181FC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84AABFB9-F94E-47BB-B205-6ED6E5181FC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84AABFB9-F94E-47BB-B205-6ED6E5181FC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3BD562F-A80F-4A7D-B14C-D3B502513563}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3BD562F-A80F-4A7D-B14C-D3B502513563}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3BD562F-A80F-4A7D-B14C-D3B502513563}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3BD562F-A80F-4A7D-B14C-D3B502513563}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2406CC8-3105-4490-9C14-E72D8EB11EA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2406CC8-3105-4490-9C14-E72D8EB11EA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2406CC8-3105-4490-9C14-E72D8EB11EA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2406CC8-3105-4490-9C14-E72D8EB11EA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
